@@ -39,7 +39,27 @@ int BinarySearchRight(int arr[], int l, int r, int target) {
 
 
 int main(){
-   int arr[] = {3, 4, 5, 1, 2};
-   int n = sizeof(arr) / sizeof(arr[0]);
-   cout<<Numberofrotate(arr,n);
+    int arr[] = {3, 4, 5, 1, 2};   // Rotated sorted array
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int target = 1;  // jis element ko search karna hai
+
+    int pivot = Numberofrotate(arr, n);
+
+    cout << "Number of rotations = " << pivot << endl;
+    cout << "Minimum element = " << arr[pivot] << endl;
+
+    int ans = -1;
+    // Decide kis half me search karna hai
+    if (target >= arr[pivot] && target <= arr[n-1]) {
+        ans = BinarySearch(arr, pivot, n-1, target);
+    } else {
+        ans = BinarySearch(arr, 0, pivot-1, target);
+    }
+
+    if(ans != -1)
+        cout << "Element " << target << " found at index " << ans << endl;
+    else
+        cout << "Element " << target << " not found" << endl;
+
+    return 0;
 }
